@@ -1,0 +1,136 @@
+[gd_scene load_steps=22 format=3 uid="uid://dwe0e654wkjky"]
+
+[ext_resource type="Material" uid="uid://dk16sdirmstvn" path="res://Materials/mat_red_grid.tres" id="1_egcll"]
+[ext_resource type="Texture2D" uid="uid://c1bkhlw1rqdyl" path="res://Textures/Sky/sky_pano.png" id="1_h12gb"]
+[ext_resource type="AudioStream" uid="uid://dw314bmtpcylr" path="res://Audio/PunkSound.wav" id="1_x4ucn"]
+[ext_resource type="PackedScene" uid="uid://dq2soh4x1pgt" path="res://Scenes-Prefabs/taxi.tscn" id="4_mooya"]
+[ext_resource type="Script" path="res://Scripts/PlayerTaxiCamera.cs" id="5_bjj71"]
+[ext_resource type="PackedScene" uid="uid://cvwdc65dfhm63" path="res://Models/Flavio/building/Building.blend" id="6_xwvia"]
+[ext_resource type="Material" uid="uid://cfxfnb25q1lu0" path="res://Models/Flavio/building/Texture/mat_building.tres" id="7_wn6v6"]
+[ext_resource type="PackedScene" uid="uid://b603yvi3pgd0y" path="res://Models/Flavio/restaurant/restaurant.blend" id="8_fq8ru"]
+[ext_resource type="Material" uid="uid://r1j65sr36ufl" path="res://Models/Flavio/restaurant/Texture/mat_restaurant.tres" id="9_rdw0s"]
+[ext_resource type="PackedScene" uid="uid://batheni5vrax8" path="res://Models/Roads/tile226.glb" id="10_unwk1"]
+[ext_resource type="PackedScene" uid="uid://bix6ks0gy7kl3" path="res://Models/Roads/tile223.glb" id="11_ex0uj"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyxl0"]
+panorama = ExtResource("1_h12gb")
+
+[sub_resource type="Sky" id="Sky_0kta1"]
+sky_material = SubResource("PanoramaSkyMaterial_kyxl0")
+
+[sub_resource type="Environment" id="Environment_t1jpc"]
+background_mode = 2
+sky = SubResource("Sky_0kta1")
+sky_rotation = Vector3(0, 4.54309, 0)
+tonemap_mode = 2
+glow_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_qix7u"]
+size = Vector3(500, 1, 500)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkmyx"]
+friction = 0.0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0vcte"]
+data = PackedVector3Array(-250, 0.5, 250, 250, 0.5, 250, -250, -0.5, 250, 250, 0.5, 250, 250, -0.5, 250, -250, -0.5, 250, 250, 0.5, -250, -250, 0.5, -250, 250, -0.5, -250, -250, 0.5, -250, -250, -0.5, -250, 250, -0.5, -250, 250, 0.5, 250, 250, 0.5, -250, 250, -0.5, 250, 250, 0.5, -250, 250, -0.5, -250, 250, -0.5, 250, -250, 0.5, -250, -250, 0.5, 250, -250, -0.5, -250, -250, 0.5, 250, -250, -0.5, 250, -250, -0.5, -250, 250, 0.5, 250, -250, 0.5, 250, 250, 0.5, -250, -250, 0.5, 250, -250, 0.5, -250, 250, 0.5, -250, -250, -0.5, 250, 250, -0.5, 250, -250, -0.5, -250, 250, -0.5, 250, 250, -0.5, -250, -250, -0.5, -250)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fwcle"]
+size = Vector3(10, 1, 30)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m6vbh"]
+data = PackedVector3Array(-5, 0.5, 15, 5, 0.5, 15, -5, -0.5, 15, 5, 0.5, 15, 5, -0.5, 15, -5, -0.5, 15, 5, 0.5, -15, -5, 0.5, -15, 5, -0.5, -15, -5, 0.5, -15, -5, -0.5, -15, 5, -0.5, -15, 5, 0.5, 15, 5, 0.5, -15, 5, -0.5, 15, 5, 0.5, -15, 5, -0.5, -15, 5, -0.5, 15, -5, 0.5, -15, -5, 0.5, 15, -5, -0.5, -15, -5, 0.5, 15, -5, -0.5, 15, -5, -0.5, -15, 5, 0.5, 15, -5, 0.5, 15, 5, 0.5, -15, -5, 0.5, 15, -5, 0.5, -15, 5, 0.5, -15, -5, -0.5, 15, 5, -0.5, 15, -5, -0.5, -15, 5, -0.5, 15, 5, -0.5, -15, -5, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hm6mi"]
+points = PackedVector3Array(0.507937, 0.214264, 0.507937, -0.471748, -1.38778e-17, -0.471748, -0.471748, -1.38778e-17, 0.471748, -0.507937, 0.214264, -0.507937, 0.471748, -1.38778e-17, -0.471748, -0.507937, 0.214264, 0.507937, 0.48844, 0.21, -0.48844, 0.471748, -1.38778e-17, 0.471748)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5yxgj"]
+points = PackedVector3Array(-1.24158, 0, -1.41526, 1.33032, 0.642857, 1.52351, 1.23559, 0, 1.41526, 1.33032, 0.642857, -1.52351, -1.28487, 0.63, 1.46474, -1.28487, 0.63, -1.46474, 1.23559, 0, -1.41526, -1.24158, 0, 1.41526)
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t1jpc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.589887, 0.757112, -0.28074, -0.19357, 0.470121, 0.861114, 0.783941, -0.453617, 0.423873, 0, 8.38452, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_qix7u")
+surface_material_override/0 = ExtResource("1_egcll")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+physics_material_override = SubResource("PhysicsMaterial_nkmyx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0vcte")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_x4ucn")
+autoplay = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="taxi" parent="." instance=ExtResource("4_mooya")]
+
+[node name="BoxRamp" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.960367, 0.27874, 0, -0.27874, 0.960367, -0.794487, 3.44965, 116.057)
+mesh = SubResource("BoxMesh_fwcle")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BoxRamp"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoxRamp/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_m6vbh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 5.16436e-08, -1.4189e-07, 0, 0.939693, 0.34202, 1.50996e-07, 0.34202, -0.939693, 0, 2.5, -4)
+script = ExtResource("5_bjj71")
+
+[node name="Building" parent="." instance=ExtResource("6_xwvia")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30.2669, 6.6, 13.4924)
+
+[node name="Lamp" parent="Building" index="0"]
+visible = false
+
+[node name="Camera" parent="Building" index="1"]
+visible = false
+
+[node name="Homemount1" parent="Building" index="2"]
+surface_material_override/0 = ExtResource("7_wn6v6")
+
+[node name="restaurant" parent="." instance=ExtResource("8_fq8ru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3597, 0, 24.7676)
+
+[node name="Lamp" parent="restaurant" index="0"]
+visible = false
+
+[node name="Camera" parent="restaurant" index="1"]
+visible = false
+
+[node name="Store5" parent="restaurant" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.05047, 3.3, -10.0758)
+surface_material_override/0 = ExtResource("9_rdw0s")
+
+[node name="tile226" parent="." instance=ExtResource("10_unwk1")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.83622, -1.91947, 30.2822)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile226/tmpParent/tile2262" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile226/tmpParent/tile2262/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_hm6mi")
+
+[node name="tile223" parent="." instance=ExtResource("11_ex0uj")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.20985, -1.91947, 20.2985)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tile223/tmpParent/tile2232" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tile223/tmpParent/tile2232/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_5yxgj")
+
+[editable path="Building"]
+[editable path="restaurant"]
+[editable path="tile226"]
+[editable path="tile223"]

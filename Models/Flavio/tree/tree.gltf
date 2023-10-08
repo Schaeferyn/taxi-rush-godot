@@ -1,0 +1,307 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.5.17",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "glTF2ExportSettings" : {
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_SEPARATE",
+                    "export_lights" : 0,
+                    "export_tangents" : 1,
+                    "use_selection" : 1
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "tree"
+        },
+        {
+            "extras" : {
+                "transparent" : 1
+            },
+            "mesh" : 1,
+            "name" : "leaves"
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "trunk_material",
+            "normalTexture" : {
+                "index" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1
+                },
+                "metallicRoughnessTexture" : {
+                    "index" : 2
+                },
+                "roughnessFactor" : 0.686363697052002
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "leaves_material",
+            "normalTexture" : {
+                "index" : 3
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 4
+                },
+                "metallicRoughnessTexture" : {
+                    "index" : 5
+                },
+                "roughnessFactor" : 0.19999998807907104
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "tree",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
+                    },
+                    "indices" : 4,
+                    "material" : 0
+                }
+            ]
+        },
+        {
+            "name" : "leaves",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 5,
+                        "NORMAL" : 6,
+                        "TANGENT" : 7,
+                        "TEXCOORD_0" : 8
+                    },
+                    "indices" : 9,
+                    "material" : 1
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        },
+        {
+            "sampler" : 0,
+            "source" : 3
+        },
+        {
+            "sampler" : 0,
+            "source" : 4
+        },
+        {
+            "sampler" : 0,
+            "source" : 5
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "trunk_normal",
+            "uri" : "trunk_normal.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "trunk_base",
+            "uri" : "trunk_base.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "trunk_metal",
+            "uri" : "trunk_metal.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "leaves_normal",
+            "uri" : "leaves_normal.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "leaves_base",
+            "uri" : "leaves_base.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "leaves_metal",
+            "uri" : "leaves_metal.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 11737,
+            "max" : [
+                3.642727851867676,
+                9.421317100524902,
+                4.436932563781738
+            ],
+            "min" : [
+                -4.005715370178223,
+                0,
+                -4.373874187469482
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 11737,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 11737,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 11737,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 54048,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 5852,
+            "max" : [
+                4.30377721786499,
+                10.174245834350586,
+                5.103792667388916
+            ],
+            "min" : [
+                -4.471185684204102,
+                0.07980024814605713,
+                -5.055402755737305
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 5852,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5126,
+            "count" : 5852,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 5852,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5123,
+            "count" : 8778,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 140844,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 140844,
+            "byteOffset" : 140844
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 187792,
+            "byteOffset" : 281688
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 93896,
+            "byteOffset" : 469480
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 108096,
+            "byteOffset" : 563376
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 70224,
+            "byteOffset" : 671472
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 70224,
+            "byteOffset" : 741696
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 93632,
+            "byteOffset" : 811920
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 46816,
+            "byteOffset" : 905552
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 17556,
+            "byteOffset" : 952368
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 969924,
+            "uri" : "tree.bin"
+        }
+    ]
+}
