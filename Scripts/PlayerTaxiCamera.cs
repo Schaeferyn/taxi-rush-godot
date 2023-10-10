@@ -13,6 +13,13 @@ public partial class PlayerTaxiCamera : Camera3D
 
 	private bool shouldUpdateTransforms;
 
+	private bool hasTargetOverride;
+	private bool snapToOverride;
+	private Vector3 positionOverride;
+	private Node3D lookTargetOveride;
+
+	public Vector3 CameraGlobalPosition => GlobalPosition;
+
 	public override void _EnterTree()
 	{
 		base._EnterTree();
@@ -28,6 +35,24 @@ public partial class PlayerTaxiCamera : Camera3D
 	}
 	
 	public override void _Process(double delta)
+	{
+		if (hasTargetOverride)
+		{
+			ProcessOverrideCamera(delta);
+		}
+		else
+		{
+			ProcessStandardCamera(delta);
+		}
+	}
+
+	void ProcessOverrideCamera(double delta)
+	{
+		GlobalPosition = positionOverride;
+		GlobalTransform = GlobalTransform.LookingAt(lookTargetOveride.GlobalPosition, Vector3.Up);
+	}
+
+	void ProcessStandardCamera(double delta)
 	{
 		GlobalTransform = GlobalTransform.InterpolateWith(camTarget.GlobalTransform, (float)delta * followLerp);
 
@@ -48,5 +73,21 @@ public partial class PlayerTaxiCamera : Camera3D
 		base._PhysicsProcess(delta);
 
 		shouldUpdateTransforms = true;
+	}
+
+	public void ApplyOverride(Vector3 pos, Node3D lookTarget, bool snap)
+	{
+		hasTargetOverride = true;
+
+		positionOverride = pos;
+		lookTargetOveride = lookTarget;
+		snapToOverride = snap;
+	}
+
+	public void EndOverride()
+	{
+		hasTargetOverride = false;
+		positionOverride = Vector3.Zero;
+		lookTargetOveride = null;
 	}
 }

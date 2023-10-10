@@ -56,13 +56,7 @@ public partial class FarePickup : Node3D
 		{
 			if (!isBeingPickedUp)
 			{
-				isBeingPickedUp = true;
-			
-				nearbyTaxi.PickupFare(this);
-				anim.Play("runLib/Run", 1.0);
-				
-				pickupArea.Monitoring = false;
-				pickupCollider.Disabled = true;
+				InitiatePickup();
 			}
 				
 			GlobalTranslate(-Transform.Basis.Z * (float)delta * walkSpeed);
@@ -72,9 +66,27 @@ public partial class FarePickup : Node3D
 			if (finalDist <= pickupFinalizeDistance)
 			{
 				nearbyTaxi.FinalizeFarePickup();
+				PlayerTaxiCamera.Instance.EndOverride();
 				QueueFree();
 			}
 		}
+	}
+
+	void InitiatePickup()
+	{
+		isBeingPickedUp = true;
+			
+		nearbyTaxi.PickupFare(this);
+		anim.Play("runLib/Run", 1.0);
+				
+		pickupArea.Monitoring = false;
+		pickupCollider.Disabled = true;
+
+		Vector3 camPosCurrent =
+			PlayerTaxiCamera.Instance.GlobalPosition + (PlayerTaxiCamera.Instance.GlobalTransform.Basis.Z * 3);
+		Vector3 camPosTarget = camPosCurrent.Lerp(GlobalPosition, 0.5f);
+		camPosTarget.Y = 1.0f;
+		PlayerTaxiCamera.Instance.ApplyOverride(camPosTarget, this, true);
 	}
 
 	void OnBodyEnter(Node3D body)
@@ -113,7 +125,7 @@ public partial class FarePickup : Node3D
 		
 		if (taxi == null) return;
 		
-		GD.Print("TAXI HAS EXITED THE FARE AREA");
+		//GD.Print("TAXI HAS EXITED THE FARE AREA");
 		
 		nearbyTaxi = null;
 		taxiDoor = null;
