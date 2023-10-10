@@ -4,11 +4,18 @@ using System;
 public partial class PlayerTaxi : VehicleBody3D
 {
 	private double steer;
-	private float max_torque = 500;
-	private float max_rpm = 500;
+	[Export] private float max_torque = 500;
+	[Export] private float max_rpm = 500;
+	[Export] private float brake_strength = 5.0f;
 
 	private VehicleWheel3D wheel_rearLeft;
 	private VehicleWheel3D wheel_rearRight;
+
+	private Node3D fareDoorLeft;
+	private Node3D fareDoorRight;
+
+	public Node3D DoorLeft => fareDoorLeft;
+	public Node3D DoorRight => fareDoorRight;
 	
 	public override void _Ready()
 	{
@@ -18,6 +25,9 @@ public partial class PlayerTaxi : VehicleBody3D
 
 		wheel_rearLeft = GetNode<VehicleWheel3D>("wheel_rear_left");
 		wheel_rearRight = GetNode<VehicleWheel3D>("wheel_rear_right");
+
+		fareDoorLeft = GetNode<Node3D>("fare_door_left");
+		fareDoorRight = GetNode<Node3D>("fare_door_right");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -34,13 +44,27 @@ public partial class PlayerTaxi : VehicleBody3D
 		
 		Steering = (float)steer * steerPowerMult;
 
-		float acceleration = Input.GetAxis("brake", "gas");
+		//float acceleration = Input.GetAxis("brake", "gas");
+		float acceleration = Input.GetActionStrength("gas");
+		float braking = Input.GetActionStrength("brake");
 		
 		float rpmL = Mathf.Abs(wheel_rearLeft.GetRpm());
 		float rpmR = Mathf.Abs(wheel_rearLeft.GetRpm());
 		wheel_rearLeft.EngineForce = acceleration * max_torque * (1 - (rpmL / max_rpm));
 		wheel_rearRight.EngineForce = acceleration * max_torque * (1 - (rpmR / max_rpm));
 
-		PlayerTaxiCamera.Instance.Fov = Mathf.Lerp(40, 75, rpmL / max_rpm);
+		Brake = braking * brake_strength * (float)delta;
+
+		//PlayerTaxiCamera.Instance.Fov = Mathf.Lerp(40, 75, rpmL / max_rpm);
+	}
+
+	public void PickupFare(FarePickup fare)
+	{
+		
+	}
+
+	public void FinalizeFarePickup()
+	{
+		
 	}
 }

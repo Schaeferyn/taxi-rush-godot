@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bsrivvurr335p"]
+
+[ext_resource type="Texture2D" uid="uid://bar6nrnbwwtwt" path="res://Models/Coins/CoinS.png" id="1_7s0db"]
+
+[resource]
+albedo_texture = ExtResource("1_7s0db")
+metallic = 0.5
+emission_enabled = true
+emission_energy_multiplier = 0.25
+emission_texture = ExtResource("1_7s0db")
+rim = 0.12

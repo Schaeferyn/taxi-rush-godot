@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ckhvk8rxlc368"]
+
+[ext_resource type="Script" path="res://Scripts/LocationData.cs" id="1_0y74b"]
+
+[resource]
+script = ExtResource("1_0y74b")
+locationName = "TestName2"
+locationPosition = Vector3(0, 0, 0)
