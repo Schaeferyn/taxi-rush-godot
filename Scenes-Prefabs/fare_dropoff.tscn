@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxnhpe1kyghjt"]
+
+[ext_resource type="Material" uid="uid://xtrphb7gtmsx" path="res://Materials/mat_dropoff_outline_scroll.tres" id="1_l0pic"]
+[ext_resource type="Material" uid="uid://seo38jo7xu3j" path="res://Materials/mat_dropoff_outline_solid.tres" id="2_e6j2l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o4fyr"]
+size = Vector3(9, 3, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2xq1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bx5rw"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2.00001),
+"format": 4097,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0),
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d2hh8"]
+resource_name = "box_outline_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 128, 63, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 128, 63, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63),
+"format": 4119,
+"index_count": 24,
+"index_data": PackedByteArray(1, 0, 5, 0, 3, 0, 1, 0, 4, 0, 5, 0, 4, 0, 9, 0, 5, 0, 4, 0, 8, 0, 9, 0, 8, 0, 7, 0, 9, 0, 8, 0, 6, 0, 7, 0, 6, 0, 2, 0, 7, 0, 6, 0, 0, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_l2xq1"),
+"primitive": 3,
+"vertex_count": 10,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 63, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 255, 63, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 255, 63, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 255, 63, 255, 127, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 255, 191, 255, 127, 255, 255, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 255, 191, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 255, 191, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 255, 191, 255, 127, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 255, 255, 255, 191, 255, 127, 255, 255, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 255, 255, 255, 191, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bx5rw")
+
+[node name="FareDropoff" type="Node3D"]
+
+[node name="DropoffArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffArea"]
+shape = SubResource("BoxShape3D_o4fyr")
+disabled = true
+
+[node name="scrolling" type="MeshInstance3D" parent="DropoffArea"]
+transform = Transform3D(4.5, 0, 0, 0, 1.5, 0, 0, 0, 7.5, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_d2hh8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_l0pic")
+
+[node name="solids" type="MeshInstance3D" parent="DropoffArea"]
+transform = Transform3D(4.5, 0, 0, 0, 0.2, 0, 0, 0, 7.5, 0.0172577, -1.31842, -0.0306864)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_d2hh8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_e6j2l")

@@ -6,7 +6,8 @@ public partial class LocationManager : Node
 {
 	public static LocationManager Instance;
 
-	[Export] private LocationData[] locations;
+	//[Export] private LocationData[] locations;
+	[Export] private Node3D[] locationNodes;
 
 	private Dictionary<string, LocationData> locationDict;
 
@@ -21,11 +22,34 @@ public partial class LocationManager : Node
 	{
 		base._Ready();
 
-		locationDict = new Dictionary<string, LocationData>(locations.Length);
+		// locationDict = new Dictionary<string, LocationData>(locations.Length);
+		//
+		// foreach (LocationData loc in locations)
+		// {
+		// 	locationDict.Add(loc.locationName, loc);
+		// }
+	}
 
-		foreach (LocationData loc in locations)
+	public FareDropoff GetLocationByName(string nameToCheck)
+	{
+		Node3D node = locationNodes[0];
+		
+		if (node is FareDropoff data)
 		{
-			locationDict.Add(loc.locationName, loc);
+			return data;
 		}
+
+		return null;
+
+		//return locations[0];
+
+		// if (locationDict.TryGetValue(nameToCheck, out var location))
+		// {
+		// 	return location;
+		// }
+		// else
+		// {
+		// 	return null;
+		// }
 	}
 }

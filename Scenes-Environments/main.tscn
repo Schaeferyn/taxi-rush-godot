@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cpii7ckcu5vml"]
+[gd_scene load_steps=27 format=3 uid="uid://cpii7ckcu5vml"]
 
 [ext_resource type="Material" uid="uid://dk16sdirmstvn" path="res://Materials/mat_red_grid.tres" id="1_egcll"]
 [ext_resource type="Texture2D" uid="uid://c1bkhlw1rqdyl" path="res://Textures/Sky/sky_pano.png" id="1_h12gb"]
@@ -13,10 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bix6ks0gy7kl3" path="res://Models/Roads/tile223.glb" id="11_ex0uj"]
 [ext_resource type="PackedScene" uid="uid://b41voedijd126" path="res://Scenes-Prefabs/char_fare_male.tscn" id="12_rqlnv"]
 [ext_resource type="Script" path="res://Scripts/LocationManager.cs" id="13_flaty"]
-[ext_resource type="Resource" uid="uid://chgj7su0gupit" path="res://Scenes-Environments/testLocation1.tres" id="14_xsl27"]
-[ext_resource type="Resource" uid="uid://ckhvk8rxlc368" path="res://Scenes-Environments/testLocation2.tres" id="15_wx7ny"]
-[ext_resource type="Resource" uid="uid://bhjm7vxi3yrd6" path="res://Scenes-Environments/testLocation3.tres" id="16_c0mto"]
 [ext_resource type="PackedScene" uid="uid://1jvuqkk405b3" path="res://Scenes-Environments/main_ui.tscn" id="17_wyhn1"]
+[ext_resource type="PackedScene" uid="uid://dxnhpe1kyghjt" path="res://Scenes-Prefabs/fare_dropoff.tscn" id="18_3nqpw"]
+[ext_resource type="Script" path="res://FareDropoff.cs" id="19_ylb32"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyxl0"]
 panorama = ExtResource("1_h12gb")
@@ -71,7 +70,6 @@ script = ExtResource("5_bjj71")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_x4ucn")
-autoplay = true
 
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -89,7 +87,7 @@ shape = SubResource("ConcavePolygonShape3D_0vcte")
 [node name="taxi" parent="." instance=ExtResource("4_mooya")]
 
 [node name="BoxRamp" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.960367, 0.27874, 0, -0.27874, 0.960367, -0.794487, 3.44965, 116.057)
+transform = Transform3D(1, 0, 0, 0, 0.960367, 0.27874, 0, -0.27874, 0.960367, -0.794487, 3.44965, 65.1453)
 mesh = SubResource("BoxMesh_fwcle")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BoxRamp"]
@@ -123,7 +121,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.0504
 surface_material_override/0 = ExtResource("9_rdw0s")
 
 [node name="tile226" parent="." instance=ExtResource("10_unwk1")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.83622, -1.91947, 30.2822)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.5876, -1.91947, 30.2822)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="tile226/tmpParent/tile2262" index="0"]
 
@@ -131,7 +129,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.83622, -1.91947, 30.282
 shape = SubResource("ConvexPolygonShape3D_hm6mi")
 
 [node name="tile223" parent="." instance=ExtResource("11_ex0uj")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.20985, -1.91947, 20.2985)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 3.2139, -1.91947, 20.2985)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="tile223/tmpParent/tile2232" index="0"]
 
@@ -142,11 +140,15 @@ shape = SubResource("ConvexPolygonShape3D_5yxgj")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.0024, 0, 16.7304)
 name = "bob"
 age = 23
-targetLocation = "asdfasdf"
+targetLocation = "TestName1"
 
-[node name="LocationManager" type="Node3D" parent="."]
+[node name="LocationManager" type="Node3D" parent="." node_paths=PackedStringArray("locationNodes")]
 script = ExtResource("13_flaty")
-locations = Array[Resource]([ExtResource("14_xsl27"), ExtResource("15_wx7ny"), ExtResource("16_c0mto")])
+locationNodes = [NodePath("../FareDropoffTest1")]
+
+[node name="FareDropoffTest1" parent="." instance=ExtResource("18_3nqpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.49467, 16)
+script = ExtResource("19_ylb32")
 
 [editable path="Building"]
 [editable path="restaurant"]

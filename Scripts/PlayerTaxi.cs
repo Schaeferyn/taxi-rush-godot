@@ -63,8 +63,17 @@ public partial class PlayerTaxi : VehicleBody3D
 		
 	}
 
-	public void FinalizeFarePickup()
+	public void FinalizeFarePickup(FareDropoff locData)
 	{
-		
+		if (locData != null)
+		{
+			//GD.Print("Activating " + locData.locationName);
+			//locData.dropoffPoint.SetActive(true);
+			locData.SetActive(true);
+		}
+		else
+		{
+			GD.Print("NULL LOCATION");
+		}
 	}
 }

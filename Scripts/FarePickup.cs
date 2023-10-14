@@ -36,6 +36,14 @@ public partial class FarePickup : Node3D
 		coinNode = GetNode<Node3D>("coin");
 	}
 
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		
+		pickupArea.BodyEntered -= OnBodyEnter;
+		pickupArea.BodyExited -= OnBodyExit;
+	}
+
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -65,8 +73,12 @@ public partial class FarePickup : Node3D
 
 			if (finalDist <= pickupFinalizeDistance)
 			{
-				nearbyTaxi.FinalizeFarePickup();
+				//LocationData data = LocationManager.Instance.GetLocationByName(targetLocation);
+				FareDropoff dropoff = LocationManager.Instance.GetLocationByName(targetLocation);
+
+				nearbyTaxi.FinalizeFarePickup(dropoff);
 				PlayerTaxiCamera.Instance.EndOverride();
+				
 				QueueFree();
 			}
 		}

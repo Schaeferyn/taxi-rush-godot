@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://xtrphb7gtmsx"]
+
+[ext_resource type="Shader" uid="uid://baby0nl0h1n15" path="res://Materials/shader_dropoff_outline_scroll.tres" id="1_jrepi"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jrepi")
+shader_parameter/ColorParameter = Color(0, 1, 0, 1)
+shader_parameter/LineWidth = 0.1
+shader_parameter/LineDivider = 1.5
+shader_parameter/ScrollSpeed = -0.075
+shader_parameter/ScrollAlpha = 0.25
