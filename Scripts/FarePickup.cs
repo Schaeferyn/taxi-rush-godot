@@ -75,6 +75,7 @@ public partial class FarePickup : Node3D
 			{
 				//LocationData data = LocationManager.Instance.GetLocationByName(targetLocation);
 				FareDropoff dropoff = LocationManager.Instance.GetLocationByName(targetLocation);
+				TaxiSessionManager.Instance.FarePickedUp(this, dropoff);
 
 				nearbyTaxi.FinalizeFarePickup(dropoff);
 				PlayerTaxiCamera.Instance.EndOverride();
@@ -88,7 +89,7 @@ public partial class FarePickup : Node3D
 	{
 		isBeingPickedUp = true;
 			
-		nearbyTaxi.PickupFare(this);
+		//nearbyTaxi.PickupFare(this);
 		anim.Play("runLib/Run", 1.0);
 				
 		pickupArea.Monitoring = false;

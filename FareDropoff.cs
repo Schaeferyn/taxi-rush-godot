@@ -6,6 +6,9 @@ public partial class FareDropoff : Node3D
 	private Area3D dropoffArea;
 	private CollisionShape3D collision;
 
+	[Export] private string myLocationName;
+	[Export] private Texture2D myLocationTexture;
+
 	private Node3D nodeScrolling;
 	private Node3D nodeSolid;
 	
@@ -13,6 +16,28 @@ public partial class FareDropoff : Node3D
 	private bool isTaxiNear;
 	private PlayerTaxi nearbyTaxi;
 	private bool isDroppingOff;
+
+	private FareLocationData locationData;
+	private bool hasLocData;
+
+	public FareLocationData LocationData
+	{
+		get
+		{
+			if (!hasLocData)
+			{
+				hasLocData = true;
+				locationData = new FareLocationData
+				{
+					locationPosition = GlobalPosition,
+					locationName = myLocationName,
+					locationTexture = myLocationTexture
+				};
+			}
+			
+			return locationData;
+		}
+	}
 	
 	public override void _Ready()
 	{
@@ -46,21 +71,6 @@ public partial class FareDropoff : Node3D
 			{
 				InitiateDropoff();
 			}
-				
-			// //GlobalTranslate(-Transform.Basis.Z * (float)delta * walkSpeed);
-			//
-			// float finalDist = GlobalPosition.DistanceTo(taxiDoor.GlobalPosition);
-			//
-			// if (finalDist <= pickupFinalizeDistance)
-			// {
-			// 	//LocationData data = LocationManager.Instance.GetLocationByName(targetLocation);
-			// 	FareDropoff dropoff = LocationManager.Instance.GetLocationByName(targetLocation);
-			//
-			// 	nearbyTaxi.FinalizeFarePickup(dropoff);
-			// 	PlayerTaxiCamera.Instance.EndOverride();
-			// 	
-			// 	QueueFree();
-			// }
 		}
 	}
 
@@ -72,7 +82,7 @@ public partial class FareDropoff : Node3D
 
 	public void SetActive(bool active)
 	{
-		GD.Print("OBJ: " + Name + " -- " + active);
+		//GD.Print("OBJ: " + Name + " -- " + active);
 		
 		isActive = active;
 

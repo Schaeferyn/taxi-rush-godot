@@ -14,6 +14,10 @@ public partial class PlayerTaxi : VehicleBody3D
 	private Node3D fareDoorLeft;
 	private Node3D fareDoorRight;
 
+	private Node3D arrow;
+	private FareLocationData targetFareLocation;
+	private bool hasTargetLocation;
+
 	public Node3D DoorLeft => fareDoorLeft;
 	public Node3D DoorRight => fareDoorRight;
 	
@@ -28,6 +32,27 @@ public partial class PlayerTaxi : VehicleBody3D
 
 		fareDoorLeft = GetNode<Node3D>("fare_door_left");
 		fareDoorRight = GetNode<Node3D>("fare_door_right");
+
+		arrow = GetNode<Node3D>("ArrowParent");
+        
+		TaxiSessionManager.Instance.OnFarePickup += FarePickedUp;
+	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		
+		TaxiSessionManager.Instance.OnFarePickup -= FarePickedUp;
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+
+		if (hasTargetLocation)
+		{
+			arrow.LookAt(targetFareLocation.locationPosition);
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -58,9 +83,12 @@ public partial class PlayerTaxi : VehicleBody3D
 		//PlayerTaxiCamera.Instance.Fov = Mathf.Lerp(40, 75, rpmL / max_rpm);
 	}
 
-	public void PickupFare(FarePickup fare)
+	void FarePickedUp(FareLocationData locData)
 	{
-		
+		targetFareLocation = locData;
+		hasTargetLocation = true;
+
+		arrow.Visible = true;
 	}
 
 	public void FinalizeFarePickup(FareDropoff locData)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddrtn28dph4j8"
+path="res://.godot/imported/arrow2.obj-25f67cf5e7a5fe4b3957c289d7a0e52c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/arrow2.obj-25f67cf5e7a5fe4b3957c289d7a0e52c.mesh"]
+
+source_file="res://Models/Arrows/arrow2.obj"
+dest_files=["res://.godot/imported/arrow2.obj-25f67cf5e7a5fe4b3957c289d7a0e52c.mesh", "res://.godot/imported/arrow2.obj-25f67cf5e7a5fe4b3957c289d7a0e52c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

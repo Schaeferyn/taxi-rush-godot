@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bljbul4lwbjrv"]
+[gd_scene load_steps=23 format=3 uid="uid://bljbul4lwbjrv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerTaxi.cs" id="1_l0xv2"]
 [ext_resource type="Material" uid="uid://b6cg3pbhvfsr1" path="res://Materials/mat_taxi.tres" id="2_33a8g"]
+[ext_resource type="ArrayMesh" uid="uid://bmpwl256w8bg3" path="res://Models/Arrows/arrow4.obj" id="3_k4gk5"]
+[ext_resource type="Material" uid="uid://blqa7mkcwm8l4" path="res://Materials/mat_arrow.tres" id="4_nfyrq"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v3x2m"]
 points = PackedVector3Array(-100.574, 65.349, -101.882, -100.574, 65.349, -89.3756, 60.1032, -172.328, -46.6903, 49.7728, 4.85072, -133.056, -81.802, -159.841, -39.3627, -69.4701, 205.639, -36.8814, -41.4593, -118.897, -129.767, 68.2985, 215.489, -76.8927, 99.6119, 65.349, -101.882, 74.5886, -147.3, -20.5977, -75.5119, 177.944, -20.5977, 74.5886, 184.214, -20.5977, 56.6267, -121.197, -122.827, -69.261, 215.489, -76.8927, -28.412, 49.5036, -133.083, -75.5119, -147.3, -20.5977, -66.0601, -157.34, -94.9076, 68.6345, -151.189, -94.3957, -51.8086, -98.1969, -134.189, 80.8395, -141.069, -26.8449, 50.2514, 55.3711, -127.911, 50.8671, -98.246, -134.212, 80.8395, 209.218, -51.8688, -81.802, 202.987, -51.8688, 80.8395, -166.072, -39.3627, 99.6119, 71.6195, -89.3756, -51.182, 55.3499, -127.881, -61.0503, -172.278, -46.6987, 17.0818, -154.168, -100.495, -81.802, -134.798, -33.1038, 53.9048, -171.816, -58.8709, 27.4662, 49.5204, -133.114)
@@ -358,10 +360,20 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_33a8g")
 
 [node name="camera_target" type="Node3D" parent="."]
-transform = Transform3D(-1, 2.99003e-08, -8.21505e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 2.5, -4)
+transform = Transform3D(-1, 2.99004e-08, -8.21506e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 2.5, -4)
 
 [node name="fare_door_right" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, -0.7)
 
 [node name="fare_door_left" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -0.7)
+
+[node name="ArrowParent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+visible = false
+
+[node name="Arrow4" type="MeshInstance3D" parent="ArrowParent"]
+transform = Transform3D(-2.18557e-08, 0, 0.2, 0, 0.5, 0, -0.5, 0, -8.74228e-09, 0, 0, 0)
+mesh = ExtResource("3_k4gk5")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_nfyrq")

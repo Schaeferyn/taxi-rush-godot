@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cpii7ckcu5vml"]
+[gd_scene load_steps=28 format=3 uid="uid://cpii7ckcu5vml"]
 
 [ext_resource type="Material" uid="uid://dk16sdirmstvn" path="res://Materials/mat_red_grid.tres" id="1_egcll"]
 [ext_resource type="Texture2D" uid="uid://c1bkhlw1rqdyl" path="res://Textures/Sky/sky_pano.png" id="1_h12gb"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bix6ks0gy7kl3" path="res://Models/Roads/tile223.glb" id="11_ex0uj"]
 [ext_resource type="PackedScene" uid="uid://b41voedijd126" path="res://Scenes-Prefabs/char_fare_male.tscn" id="12_rqlnv"]
 [ext_resource type="Script" path="res://Scripts/LocationManager.cs" id="13_flaty"]
+[ext_resource type="Texture2D" uid="uid://bgdbe7quibx3t" path="res://Textures/Locations/deLaNuit.png" id="17_ibdi8"]
 [ext_resource type="PackedScene" uid="uid://1jvuqkk405b3" path="res://Scenes-Environments/main_ui.tscn" id="17_wyhn1"]
 [ext_resource type="PackedScene" uid="uid://dxnhpe1kyghjt" path="res://Scenes-Prefabs/fare_dropoff.tscn" id="18_3nqpw"]
 [ext_resource type="Script" path="res://FareDropoff.cs" id="19_ylb32"]
@@ -144,11 +145,14 @@ targetLocation = "TestName1"
 
 [node name="LocationManager" type="Node3D" parent="." node_paths=PackedStringArray("locationNodes")]
 script = ExtResource("13_flaty")
-locationNodes = [NodePath("../FareDropoffTest1")]
+locations = Array[Resource]([])
+locationNodes = [NodePath("../Drop-RestaurantDeLaNuit")]
 
-[node name="FareDropoffTest1" parent="." instance=ExtResource("18_3nqpw")]
+[node name="Drop-RestaurantDeLaNuit" parent="." instance=ExtResource("18_3nqpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.49467, 16)
 script = ExtResource("19_ylb32")
+myLocationName = "Restaurant de la Nuit"
+myLocationTexture = ExtResource("17_ibdi8")
 
 [editable path="Building"]
 [editable path="restaurant"]

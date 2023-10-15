@@ -1,12 +1,21 @@
-[gd_scene format=3 uid="uid://1jvuqkk405b3"]
+[gd_scene load_steps=3 format=3 uid="uid://1jvuqkk405b3"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" path="res://Scenes-Environments/PlayerTaxiUI.cs" id="1_4bq7k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cwkuf"]
+font_size = 28
+
+[node name="Control" type="Control" node_paths=PackedStringArray("locationImage", "locationName", "locationParent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4bq7k")
+locationImage = NodePath("LocationParent/LocationImage")
+locationName = NodePath("LocationParent/LocationImage/LocationName")
+locationParent = NodePath("LocationParent")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -30,3 +39,42 @@ offset_top = 25.0
 offset_right = 432.0
 offset_bottom = 125.0
 color = Color(0.419608, 0.435294, 1, 0.501961)
+
+[node name="LocationParent" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -348.0
+offset_right = 414.0
+offset_bottom = 18.0
+grow_vertical = 2
+
+[node name="LocationImage" type="TextureRect" parent="LocationParent"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -175.0
+offset_right = 358.0
+offset_bottom = 175.0
+grow_vertical = 2
+expand_mode = 2
+
+[node name="LocationName" type="Label" parent="LocationParent/LocationImage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = 15.9996
+offset_right = 154.0
+offset_bottom = 57.9996
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_cwkuf")
+horizontal_alignment = 1

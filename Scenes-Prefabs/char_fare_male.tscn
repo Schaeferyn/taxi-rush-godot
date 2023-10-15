@@ -7,12 +7,13 @@
 [ext_resource type="Material" uid="uid://bbffxn81572o3" path="res://Materials/mat_coinG.tres" id="4_d6yyf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bn203"]
+height = 3.0
 radius = 6.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fu17w"]
 top_radius = 6.0
 bottom_radius = 6.0
-height = 0.1
+height = 0.2
 cap_top = false
 cap_bottom = false
 
