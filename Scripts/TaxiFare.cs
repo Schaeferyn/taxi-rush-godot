@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class FarePickup : Node3D
+public partial class TaxiFare : Node3D
 {
 	private Area3D pickupArea;
 	private CollisionShape3D pickupCollider;
@@ -80,7 +80,10 @@ public partial class FarePickup : Node3D
 				nearbyTaxi.FinalizeFarePickup(dropoff);
 				PlayerTaxiCamera.Instance.EndOverride();
 				
-				QueueFree();
+				//QueueFree();
+				Visible = false;
+				pickupArea.Visible = false;
+				isTaxiNear = false;
 			}
 		}
 	}
@@ -94,12 +97,26 @@ public partial class FarePickup : Node3D
 				
 		pickupArea.Monitoring = false;
 		pickupCollider.Disabled = true;
+		coinNode.Visible = false;
+		nearbyTaxi.PickupStarted(this);
 
 		Vector3 camPosCurrent =
 			PlayerTaxiCamera.Instance.GlobalPosition + (PlayerTaxiCamera.Instance.GlobalTransform.Basis.Z * 3);
 		Vector3 camPosTarget = camPosCurrent.Lerp(GlobalPosition, 0.5f);
 		camPosTarget.Y = 1.0f;
 		PlayerTaxiCamera.Instance.ApplyOverride(camPosTarget, this, true);
+	}
+
+	public void BeginDropoff()
+	{
+		Visible = true;
+		anim.Play("Idle", 1.0);
+	}
+
+	public void EndDropoff()
+	{
+		//Visible = false;
+		QueueFree();
 	}
 
 	void OnBodyEnter(Node3D body)

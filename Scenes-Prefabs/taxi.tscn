@@ -256,12 +256,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dvdr0")
 
-[node name="taxi" type="VehicleBody3D"]
+[node name="taxi" type="VehicleBody3D" node_paths=PackedStringArray("taxiMesh")]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.15, 0)
 continuous_cd = true
 script = ExtResource("1_l0xv2")
 brake_strength = 150.0
+steerPowerDegrees = 30.0
+taxiMesh = NodePath("taxi/Car_Main")
 
 [node name="CollisionShape3D-body" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, -1.19209e-09, -0.01, 0, 0.01, -1.19209e-09, -0.000532769, -0.00954968, -0.0475696)
@@ -272,6 +274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0.613, 0
 use_as_steering = true
 wheel_radius = 0.3
 wheel_rest_length = 0.125
+wheel_friction_slip = 1.0
 suspension_travel = 0.25
 suspension_stiffness = 50.0
 damping_compression = 1.9
@@ -288,6 +291,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, -0.613, 
 use_as_steering = true
 wheel_radius = 0.3
 wheel_rest_length = 0.125
+wheel_friction_slip = 1.0
 suspension_travel = 0.25
 suspension_stiffness = 50.0
 damping_compression = 1.9
@@ -304,6 +308,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, 0.613, 0
 use_as_traction = true
 wheel_radius = 0.3
 wheel_rest_length = 0.125
+wheel_friction_slip = 0.9
 suspension_travel = 0.25
 suspension_stiffness = 50.0
 damping_compression = 1.9
@@ -320,6 +325,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, -0.613, 
 use_as_traction = true
 wheel_radius = 0.3
 wheel_rest_length = 0.125
+wheel_friction_slip = 0.9
 suspension_travel = 0.25
 suspension_stiffness = 50.0
 damping_compression = 1.9
@@ -334,7 +340,7 @@ surface_material_override/0 = ExtResource("2_33a8g")
 [node name="taxi" type="Node3D" parent="."]
 
 [node name="Car_Main" type="MeshInstance3D" parent="taxi"]
-transform = Transform3D(0.01, 0, 0, 0, -1.19209e-09, -0.01, 0, 0.01, -1.19209e-09, -0.000532769, -0.00954968, -0.0475696)
+transform = Transform3D(0.01, 0, 0, 0, -1.19209e-09, -0.01, 0, 0.01, -1.19209e-09, -0.00759044, 0.00490492, -0.0530141)
 mesh = SubResource("ArrayMesh_hpgjd")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_33a8g")

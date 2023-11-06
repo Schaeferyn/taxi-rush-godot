@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class FareDropoff : Node3D
+public partial class FareDropoff : Node3DTimedActions
 {
 	private Area3D dropoffArea;
 	private CollisionShape3D collision;
@@ -19,7 +19,7 @@ public partial class FareDropoff : Node3D
 
 	private FareLocationData locationData;
 	private bool hasLocData;
-
+	
 	public FareLocationData LocationData
 	{
 		get
@@ -63,6 +63,8 @@ public partial class FareDropoff : Node3D
 
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
+		
 		if (!isActive || !isTaxiNear || isDroppingOff) return;
 		
 		if (nearbyTaxi.LinearVelocity.Length() < 0.5f)
@@ -77,7 +79,17 @@ public partial class FareDropoff : Node3D
 	void InitiateDropoff()
 	{
 		isDroppingOff = true;
+		nearbyTaxi.InitiateDropoff(GlobalPosition);
+		
+		//GD.Print("Beginning dropoff");
 		SetActive(false);
+		BeginTimerEvent(3.0f, FinalizeDropoff);
+	}
+
+	void FinalizeDropoff()
+	{
+		//GD.Print("Ending dropoff");
+		nearbyTaxi.FinalizeDropoff();
 	}
 
 	public void SetActive(bool active)

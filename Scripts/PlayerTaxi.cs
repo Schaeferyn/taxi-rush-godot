@@ -7,7 +7,12 @@ public partial class PlayerTaxi : VehicleBody3D
 	[Export] private float max_torque = 500;
 	[Export] private float max_rpm = 500;
 	[Export] private float brake_strength = 5.0f;
+	[Export] private float steerChangeForce = 5.0f;
+	[Export] private float steerPowerDegrees = 60.0f;
 
+	private VehicleWheel3D wheel_frontLeft;
+	private VehicleWheel3D wheel_frontRight;
+	
 	private VehicleWheel3D wheel_rearLeft;
 	private VehicleWheel3D wheel_rearRight;
 
@@ -18,8 +23,13 @@ public partial class PlayerTaxi : VehicleBody3D
 	private FareLocationData targetFareLocation;
 	private bool hasTargetLocation;
 
+	[Export] private MeshInstance3D taxiMesh;
+
 	public Node3D DoorLeft => fareDoorLeft;
 	public Node3D DoorRight => fareDoorRight;
+	
+	public bool CanDrive { get; private set; }
+	public TaxiFare CurrentFare { get; private set; }
 	
 	public override void _Ready()
 	{
@@ -27,6 +37,9 @@ public partial class PlayerTaxi : VehicleBody3D
 
 		Engine.MaxFps = 60;
 
+		wheel_frontLeft = GetNode<VehicleWheel3D>("wheel_front_left");
+		wheel_frontRight = GetNode<VehicleWheel3D>("wheel_front_right");
+		
 		wheel_rearLeft = GetNode<VehicleWheel3D>("wheel_rear_left");
 		wheel_rearRight = GetNode<VehicleWheel3D>("wheel_rear_right");
 
@@ -34,7 +47,8 @@ public partial class PlayerTaxi : VehicleBody3D
 		fareDoorRight = GetNode<Node3D>("fare_door_right");
 
 		arrow = GetNode<Node3D>("ArrowParent");
-        
+
+		CanDrive = true;
 		TaxiSessionManager.Instance.OnFarePickup += FarePickedUp;
 	}
 
@@ -59,15 +73,16 @@ public partial class PlayerTaxi : VehicleBody3D
 	{
 		base._PhysicsProcess(delta);
 
+		if (!CanDrive) return;
+
 		float steerAxis = Input.GetAxis("right", "left");
-		steer = Mathf.Lerp(steer, steerAxis * 0.4f, 5.0d * delta);
+		steer = Mathf.Lerp(steer, steerAxis, steerChangeForce * delta);
 		
 
 		float abs = Mathf.Abs(steerAxis);
 		//float steerPowerMult = abs > 0.5f ? 0.5f : 1.0f;
-		float steerPowerMult = 1.0f;
-		
-		Steering = (float)steer * steerPowerMult;
+
+		Steering = (float)steer * Mathf.DegToRad(steerPowerDegrees);
 
 		//float acceleration = Input.GetAxis("brake", "gas");
 		float acceleration = Input.GetActionStrength("gas");
@@ -80,7 +95,18 @@ public partial class PlayerTaxi : VehicleBody3D
 
 		Brake = braking * brake_strength * (float)delta;
 
+		Vector3 forward = GlobalTransform.Basis.Z;
+		float angle = LinearVelocity.AngleTo(forward);
+		LinearVelocity += GlobalTransform.Basis.X * (angle * 0.1f);
+
 		//PlayerTaxiCamera.Instance.Fov = Mathf.Lerp(40, 75, rpmL / max_rpm);
+	}
+
+	public void PickupStarted(TaxiFare fare)
+	{
+		CanDrive = false;
+		CurrentFare = fare;
+		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.Black;
 	}
 
 	void FarePickedUp(FareLocationData locData)
@@ -89,10 +115,15 @@ public partial class PlayerTaxi : VehicleBody3D
 		hasTargetLocation = true;
 
 		arrow.Visible = true;
+		CanDrive = false;
+		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.Black;
 	}
 
 	public void FinalizeFarePickup(FareDropoff locData)
 	{
+		CanDrive = true;
+		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.White;
+		
 		if (locData != null)
 		{
 			//GD.Print("Activating " + locData.locationName);
@@ -103,5 +134,33 @@ public partial class PlayerTaxi : VehicleBody3D
 		{
 			GD.Print("NULL LOCATION");
 		}
+	}
+
+	public void InitiateDropoff(Vector3 dropPosition)
+	{
+		arrow.Visible = false;
+		CanDrive = false;
+		LinearVelocity = Vector3.Zero;
+		AngularVelocity = Vector3.Zero;
+		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.Black;
+
+		Vector3 appearPos = DoorLeft.GlobalPosition;
+		if (dropPosition.DistanceTo(DoorLeft.GlobalPosition) >
+		    dropPosition.DistanceTo(DoorRight.GlobalPosition))
+		{
+			appearPos = DoorRight.GlobalPosition;
+		}
+
+		CurrentFare.GlobalPosition = appearPos;
+		CurrentFare.BeginDropoff();
+	}
+
+	public void FinalizeDropoff()
+	{
+		(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.White;
+		
+		CurrentFare.EndDropoff();
+		CanDrive = true;
+		CurrentFare = null;
 	}
 }

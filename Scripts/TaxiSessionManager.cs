@@ -14,7 +14,7 @@ public partial class TaxiSessionManager : Node
 		Instance = this;
 	}
 
-	public void FarePickedUp(FarePickup pickup, FareDropoff dropoff)
+	public void FarePickedUp(TaxiFare pickup, FareDropoff dropoff)
 	{
 		OnFarePickup?.Invoke(dropoff.LocationData);
 	}

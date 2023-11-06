@@ -122,7 +122,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.0504
 surface_material_override/0 = ExtResource("9_rdw0s")
 
 [node name="tile226" parent="." instance=ExtResource("10_unwk1")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.5876, -1.91947, 30.2822)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 79.9288, -1.91947, 30.2822)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="tile226/tmpParent/tile2262" index="0"]
 
@@ -130,7 +130,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.5876, -1.91947, 30.2822)
 shape = SubResource("ConvexPolygonShape3D_hm6mi")
 
 [node name="tile223" parent="." instance=ExtResource("11_ex0uj")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 3.2139, -1.91947, 20.2985)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 80.5551, -1.91947, 20.2985)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="tile223/tmpParent/tile2232" index="0"]
 
