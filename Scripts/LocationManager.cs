@@ -6,7 +6,7 @@ public partial class LocationManager : Node
 {
 	public static LocationManager Instance;
 
-	[Export] private LocationData[] locations;
+	//[Export] private LocationData[] locations;
 	[Export] private Node3D[] locationNodes;
 
 	//private Dictionary<string, LocationData> locationDict;

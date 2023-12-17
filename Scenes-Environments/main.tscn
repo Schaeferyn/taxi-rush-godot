@@ -1,9 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://cpii7ckcu5vml"]
+[gd_scene load_steps=28 format=3 uid="uid://ckjk0e1vbnelt"]
 
 [ext_resource type="Material" uid="uid://dk16sdirmstvn" path="res://Materials/mat_red_grid.tres" id="1_egcll"]
 [ext_resource type="Texture2D" uid="uid://c1bkhlw1rqdyl" path="res://Textures/Sky/sky_pano.png" id="1_h12gb"]
 [ext_resource type="AudioStream" uid="uid://dw314bmtpcylr" path="res://Audio/PunkSound.wav" id="1_x4ucn"]
-[ext_resource type="PackedScene" uid="uid://bljbul4lwbjrv" path="res://Scenes-Prefabs/taxi.tscn" id="4_mooya"]
+[ext_resource type="PackedScene" uid="uid://rcnq2bqy0upn" path="res://Scenes-Prefabs/taxi.tscn" id="4_mooya"]
 [ext_resource type="Script" path="res://Scripts/PlayerTaxiCamera.cs" id="5_bjj71"]
 [ext_resource type="PackedScene" uid="uid://cvwdc65dfhm63" path="res://Models/Flavio/building/Building.blend" id="6_xwvia"]
 [ext_resource type="Material" uid="uid://cfxfnb25q1lu0" path="res://Models/Flavio/building/Texture/mat_building.tres" id="7_wn6v6"]
@@ -11,11 +11,11 @@
 [ext_resource type="Material" uid="uid://r1j65sr36ufl" path="res://Models/Flavio/restaurant/Texture/mat_restaurant.tres" id="9_rdw0s"]
 [ext_resource type="PackedScene" uid="uid://batheni5vrax8" path="res://Models/Roads/tile226.glb" id="10_unwk1"]
 [ext_resource type="PackedScene" uid="uid://bix6ks0gy7kl3" path="res://Models/Roads/tile223.glb" id="11_ex0uj"]
-[ext_resource type="PackedScene" uid="uid://b41voedijd126" path="res://Scenes-Prefabs/char_fare_male.tscn" id="12_rqlnv"]
+[ext_resource type="PackedScene" uid="uid://dftf46ji5xjtx" path="res://Scenes-Prefabs/char_fare_male.tscn" id="12_rqlnv"]
 [ext_resource type="Script" path="res://Scripts/LocationManager.cs" id="13_flaty"]
 [ext_resource type="Texture2D" uid="uid://bgdbe7quibx3t" path="res://Textures/Locations/deLaNuit.png" id="17_ibdi8"]
-[ext_resource type="PackedScene" uid="uid://1jvuqkk405b3" path="res://Scenes-Environments/main_ui.tscn" id="17_wyhn1"]
-[ext_resource type="PackedScene" uid="uid://dxnhpe1kyghjt" path="res://Scenes-Prefabs/fare_dropoff.tscn" id="18_3nqpw"]
+[ext_resource type="PackedScene" uid="uid://d13ymavtdy2fb" path="res://Scenes-Environments/main_ui.tscn" id="17_wyhn1"]
+[ext_resource type="PackedScene" uid="uid://b4vf4a5x0g7vw" path="res://Scenes-Prefabs/fare_dropoff.tscn" id="18_3nqpw"]
 [ext_resource type="Script" path="res://FareDropoff.cs" id="19_ylb32"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyxl0"]
@@ -86,6 +86,10 @@ shape = SubResource("ConcavePolygonShape3D_0vcte")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="taxi" parent="." instance=ExtResource("4_mooya")]
+driftThresholds = Vector2(2, 45)
+extraDriftTorque = 3500.0
+extraDriftSlippage = 1.0
+handbrakeSlippage = 0.925
 
 [node name="BoxRamp" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.960367, 0.27874, 0, -0.27874, 0.960367, -0.794487, 3.44965, 65.1453)
@@ -145,7 +149,6 @@ targetLocation = "TestName1"
 
 [node name="LocationManager" type="Node3D" parent="." node_paths=PackedStringArray("locationNodes")]
 script = ExtResource("13_flaty")
-locations = Array[Resource]([])
 locationNodes = [NodePath("../Drop-RestaurantDeLaNuit")]
 
 [node name="Drop-RestaurantDeLaNuit" parent="." instance=ExtResource("18_3nqpw")]

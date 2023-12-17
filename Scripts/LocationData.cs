@@ -6,5 +6,5 @@ public partial class LocationData : Resource
 	[Export] public string locationName;
 	[Export] public Texture2D locationTexture;
 	[Export] public Vector3 locationPosition;
-	[Export] public FareDropoff dropoffPoint;
+	//[Export] public FareDropoff dropoffPoint;
 }
