@@ -384,7 +384,7 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_33a8g")
 
 [node name="camera_target" type="Node3D" parent="."]
-transform = Transform3D(-1, 2.99004e-08, -8.21506e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 2.5, -4)
+transform = Transform3D(-1, 5.16436e-08, -1.4189e-07, 0, 0.939693, 0.34202, 1.50996e-07, 0.34202, -0.939693, 0, 2.5, -4)
 
 [node name="fare_door_right" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, -0.7)

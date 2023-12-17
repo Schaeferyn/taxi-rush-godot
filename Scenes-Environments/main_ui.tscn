@@ -18,6 +18,7 @@ locationName = NodePath("LocationParent/LocationImage/LocationName")
 locationParent = NodePath("LocationParent")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,6 +34,7 @@ grow_vertical = 2
 color = Color(0.419608, 0.435294, 1, 0.501961)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 offset_left = 32.0
 offset_top = 25.0

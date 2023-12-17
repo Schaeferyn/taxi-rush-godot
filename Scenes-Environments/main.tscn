@@ -86,10 +86,14 @@ shape = SubResource("ConcavePolygonShape3D_0vcte")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="taxi" parent="." instance=ExtResource("4_mooya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0172184, -0.00857401, 0.0041604)
+max_speed = 30.0
+steerChangeForce = 2.0
 driftThresholds = Vector2(2, 45)
-extraDriftTorque = 3500.0
+extraDriftTorque = 5000.0
 extraDriftSlippage = 1.0
 handbrakeSlippage = 0.925
+maxDriftFriction = Vector2(1, 0.9)
 
 [node name="BoxRamp" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.960367, 0.27874, 0, -0.27874, 0.960367, -0.794487, 3.44965, 65.1453)

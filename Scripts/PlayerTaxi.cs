@@ -12,6 +12,11 @@ public partial class PlayerTaxi : VehicleBody3D
 	[Export] private float steerChangeForce = 5.0f;
 	[Export] private float steerPowerDegrees = 60.0f;
 
+	[Export] private Node3D camTarget;
+	private Vector3 camTargetRotation;
+	private float camRotYStart;
+	private Vector3 camLookOffset;
+
 	private VehicleWheel3D wheel_frontLeft;
 	private VehicleWheel3D wheel_frontRight;
 	private float wheelFrictionFront;
@@ -33,6 +38,8 @@ public partial class PlayerTaxi : VehicleBody3D
 	[Export] private float extraDriftSpeed = 5.0f;
 	[Export] private float extraDriftSlippage = 0.25f;
 	[Export] private float handbrakeSlippage = 0.5f;
+	[Export] private Vector2 maxDriftFriction;
+	[Export] private float handbrakeFrction = 0.5f;
 	private float addedDriftTorque;
 	private float addedDriftSpeed;
 	private float addedDriftSlippage;
@@ -48,6 +55,9 @@ public partial class PlayerTaxi : VehicleBody3D
 	private Label3D debugLabelRR;
 
 	private bool isHandbraking;
+
+	private const float ms_to_mph = 2.23694f;
+	private float currentMPH;
 
 	public Node3D DoorLeft => fareDoorLeft;
 	public Node3D DoorRight => fareDoorRight;
@@ -72,6 +82,9 @@ public partial class PlayerTaxi : VehicleBody3D
 		fareDoorLeft = GetNode<Node3D>("fare_door_left");
 		fareDoorRight = GetNode<Node3D>("fare_door_right");
 
+		camTarget = GetNode<Node3D>("camera_target");
+		camTargetRotation = camTarget.RotationDegrees;
+		camRotYStart = camTargetRotation.Y;
 		arrow = GetNode<Node3D>("ArrowParent");
 
 		debugLabel = GetNode<Label3D>("Debug1");
@@ -117,15 +130,28 @@ public partial class PlayerTaxi : VehicleBody3D
 		float braking = Input.GetActionStrength("brake");
 		isHandbraking = Input.GetActionStrength("handbrake") > 0.5f;
 
+		// camLookOffset.X = LinearVelocity.X;
+		// camLookOffset.Y = 0;
+		// camLookOffset.Z = LinearVelocity.Z;
+		// if (camLookOffset.Length() > 0.1f)
+		// {
+		// 	camTarget.LookAt(camLookOffset);
+		// }
+
 		currentMaxTorque = max_torque + (isDrifting ? addedDriftTorque : 0);
 		currentMaxSpeed = max_speed + (isDrifting ? addedDriftSpeed : 0);
 
 		// wheel_frontLeft.WheelFrictionSlip = wheelFrictionFront - (isDrifting ? addedDriftSlippage : 0);
 		// wheel_frontRight.WheelFrictionSlip = wheelFrictionFront - (isDrifting ? addedDriftSlippage : 0);
-		wheel_frontLeft.WheelFrictionSlip = wheelFrictionFront;
-		wheel_frontRight.WheelFrictionSlip = wheelFrictionFront;
-		wheel_rearLeft.WheelFrictionSlip = wheelFrictionRear - (isHandbraking ? handbrakeSlippage : 0);
-		wheel_rearRight.WheelFrictionSlip = wheelFrictionRear - (isHandbraking ? handbrakeSlippage : 0);
+		// wheel_rearLeft.WheelFrictionSlip = wheelFrictionRear - (isHandbraking ? handbrakeSlippage : (isDrifting ? addedDriftSlippage : 0));
+		// wheel_rearRight.WheelFrictionSlip = wheelFrictionRear - (isHandbraking ? handbrakeSlippage : (isDrifting ? addedDriftSlippage : 0));
+
+		float front = Mathf.Lerp(wheelFrictionFront, maxDriftFriction.X, driftStrength);
+		float rear = Mathf.Lerp(wheelFrictionRear, maxDriftFriction.Y, driftStrength);
+		wheel_frontLeft.WheelFrictionSlip = front;
+		wheel_frontRight.WheelFrictionSlip = front;
+		wheel_rearLeft.WheelFrictionSlip = isHandbraking ? handbrakeFrction : rear;
+		wheel_rearRight.WheelFrictionSlip = isHandbraking ? handbrakeFrction : rear;
 		
 		debugLabelFL.Text = wheel_frontLeft.WheelFrictionSlip.ToString("0.00");
 		debugLabelFR.Text = wheel_frontRight.WheelFrictionSlip.ToString("0.00");
@@ -136,8 +162,22 @@ public partial class PlayerTaxi : VehicleBody3D
 		// float rpmR = Mathf.Abs(wheel_rearLeft.GetRpm());
 		// wheel_rearLeft.EngineForce = acceleration * currentMaxTorque * (1 - (rpmL / currentMaxRPM));
 		// wheel_rearRight.EngineForce = acceleration * currentMaxTorque * (1 - (rpmR / currentMaxRPM));
-		wheel_rearLeft.EngineForce = acceleration * currentMaxTorque;
-		wheel_rearRight.EngineForce = acceleration * currentMaxTorque;
+
+		float dot = LinearVelocity.Normalized().Dot(GlobalBasis.Z.Normalized());
+		debugLabel.Text = dot.ToString("0.00");
+		float fwdSpeed = LinearVelocity.Length() * dot;
+		float powerMult = 1 - (fwdSpeed / max_speed);
+
+		// if (isDrifting)
+		// {
+			wheel_rearLeft.EngineForce = acceleration * currentMaxTorque * powerMult;
+			wheel_rearRight.EngineForce = acceleration * currentMaxTorque * powerMult;
+		// }
+		// else
+		// {
+		// 	wheel_rearLeft.EngineForce = acceleration * currentMaxTorque * (1 - (LinearVelocity.Length() / currentMaxSpeed));
+		// 	wheel_rearRight.EngineForce = acceleration * currentMaxTorque * (1 - (LinearVelocity.Length() / currentMaxSpeed));
+		// }
 
 		if (isHandbraking)
 		{
@@ -147,7 +187,8 @@ public partial class PlayerTaxi : VehicleBody3D
 		{
 			Brake = braking * brake_strength * (float)delta;
 		}
-		
+
+		currentMPH = LinearVelocity.Length() * ms_to_mph;
 		debugLabel2.Text = LinearVelocity.Length().ToString("0.00");
 
 		if (LinearVelocity.Length() < 0.5f) return;
@@ -155,9 +196,14 @@ public partial class PlayerTaxi : VehicleBody3D
 		float ang = Mathf.RadToDeg(Mathf.Atan2(LinearVelocity.X, LinearVelocity.Z));
 		Vector3 rota = GlobalRotationDegrees;
 		float angDiff = Mathf.Abs(rota.Y - ang);
-		
+		if (angDiff < 180)
+		{
+			camTargetRotation.Y = camRotYStart + ((ang - rota.Y) * 0.25f);
+			camTarget.RotationDegrees = camTargetRotation;
+		}
+
 		//GD.Print("A: " + angDiff);
-		debugLabel.Text = angDiff.ToString("0.00");
+		//debugLabel.Text = angDiff.ToString("0.00");
 		debugLabel.Modulate = isDrifting ? Colors.Fuchsia : Colors.White;
 		debugLabel2.Modulate = isHandbraking ? Colors.Blue : Colors.White;
 
