@@ -189,7 +189,7 @@ public partial class PlayerTaxi : VehicleBody3D
 		}
 
 		currentMPH = LinearVelocity.Length() * ms_to_mph;
-		debugLabel2.Text = LinearVelocity.Length().ToString("0.00");
+		debugLabel2.Text = currentMPH.ToString("0.00");
 
 		if (LinearVelocity.Length() < 0.5f) return;
 			
