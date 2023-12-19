@@ -55,7 +55,8 @@ points = PackedVector3Array(-1.24158, 0, -1.41526, 1.33032, 0.642857, 1.52351, 1
 
 [node name="world" type="Node3D"]
 
-[node name="main_ui" parent="." instance=ExtResource("17_wyhn1")]
+[node name="main_ui" parent="." node_paths=PackedStringArray("taxi") instance=ExtResource("17_wyhn1")]
+taxi = NodePath("../taxi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t1jpc")

@@ -9,6 +9,10 @@ public partial class PlayerTaxiUI : ControlTimedActions
 	[Export] private TextureRect locationImage;
 	[Export] private Label locationName;
 	[Export] private CanvasItem locationParent;
+	[Export] private PlayerTaxi taxi;
+
+	private ColorRect gearUIDrive;
+	private ColorRect gearUIReverse;
 
 	public override void _EnterTree()
 	{
@@ -20,10 +24,14 @@ public partial class PlayerTaxiUI : ControlTimedActions
 	public override void _Ready()
 	{
 		base._Ready();
+
+		gearUIDrive = GetNode<ColorRect>("GearUIBG/GearUIDrive");
+		gearUIReverse = GetNode<ColorRect>("GearUIBG/GearUIReverse");
 		
 		SetTargetLocationVisibility(false);
 
 		TaxiSessionManager.Instance.OnFarePickup += ShowTargetLocation;
+		taxi.OnReverseToggled += ReverseToggled;
 	}
 
 	public override void _ExitTree()
@@ -31,6 +39,7 @@ public partial class PlayerTaxiUI : ControlTimedActions
 		base._ExitTree();
 		
 		TaxiSessionManager.Instance.OnFarePickup -= ShowTargetLocation;
+		taxi.OnReverseToggled -= ReverseToggled;
 	}
 
 	void ShowTargetLocation(FareLocationData locData)
@@ -51,6 +60,12 @@ public partial class PlayerTaxiUI : ControlTimedActions
 	void SetTargetLocationVisibility(bool isVisible)
 	{
 		locationParent.Visible = isVisible;
+	}
+
+	void ReverseToggled(bool isReversing)
+	{
+		gearUIDrive.Visible = !isReversing;
+		gearUIReverse.Visible = isReversing;
 	}
 }
 

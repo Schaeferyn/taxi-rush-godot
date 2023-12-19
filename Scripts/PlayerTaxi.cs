@@ -58,6 +58,9 @@ public partial class PlayerTaxi : VehicleBody3D
 
 	private const float ms_to_mph = 2.23694f;
 	private float currentMPH;
+	
+	private bool isReversing;
+	public Action<bool> OnReverseToggled;
 
 	public Node3D DoorLeft => fareDoorLeft;
 	public Node3D DoorRight => fareDoorRight;
@@ -128,7 +131,14 @@ public partial class PlayerTaxi : VehicleBody3D
 		
 		float acceleration = Input.GetActionStrength("gas");
 		float braking = Input.GetActionStrength("brake");
-		isHandbraking = Input.GetActionStrength("handbrake") > 0.5f;
+		
+		//isHandbraking = Input.GetActionStrength("handbrake") > 0.5f;
+		isHandbraking = Input.IsActionPressed("handbrake");
+
+		if (Input.IsActionJustPressed("toggle_reverse"))
+		{
+			ToggleReverse();
+		}
 
 		// camLookOffset.X = LinearVelocity.X;
 		// camLookOffset.Y = 0;
@@ -168,10 +178,16 @@ public partial class PlayerTaxi : VehicleBody3D
 		float fwdSpeed = LinearVelocity.Length() * dot;
 		float powerMult = 1 - (fwdSpeed / max_speed);
 
+		float powerToApply = acceleration * currentMaxTorque * powerMult;
+		if (isReversing)
+		{
+			powerToApply *= -0.15f;
+		}
+		
+		wheel_rearLeft.EngineForce = powerToApply;
+		wheel_rearRight.EngineForce = powerToApply;
 		// if (isDrifting)
 		// {
-			wheel_rearLeft.EngineForce = acceleration * currentMaxTorque * powerMult;
-			wheel_rearRight.EngineForce = acceleration * currentMaxTorque * powerMult;
 		// }
 		// else
 		// {
@@ -279,5 +295,11 @@ public partial class PlayerTaxi : VehicleBody3D
 		CurrentFare.EndDropoff();
 		CanDrive = true;
 		CurrentFare = null;
+	}
+
+	public void ToggleReverse()
+	{
+		isReversing = !isReversing;
+		OnReverseToggled?.Invoke(isReversing);
 	}
 }

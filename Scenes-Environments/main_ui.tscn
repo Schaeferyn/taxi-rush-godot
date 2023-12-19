@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d13ymavtdy2fb"]
+[gd_scene load_steps=4 format=3 uid="uid://d13ymavtdy2fb"]
 
 [ext_resource type="Script" path="res://Scenes-Environments/PlayerTaxiUI.cs" id="1_4bq7k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cwkuf"]
 font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_b1grh"]
+font_size = 38
+font_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" node_paths=PackedStringArray("locationImage", "locationName", "locationParent")]
 layout_mode = 3
@@ -79,3 +83,88 @@ grow_horizontal = 2
 grow_vertical = 0
 label_settings = SubResource("LabelSettings_cwkuf")
 horizontal_alignment = 1
+
+[node name="GearUIBG" type="ColorRect" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = 80.0
+offset_right = -314.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GearUIDrive" type="ColorRect" parent="GearUIBG"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -42.0
+offset_right = 20.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0, 1)
+
+[node name="Label" type="Label" parent="GearUIBG/GearUIDrive"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "D"
+label_settings = SubResource("LabelSettings_b1grh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GearUIReverse" type="ColorRect" parent="GearUIBG"]
+visible = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 2.0
+offset_right = 20.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="GearUIBG/GearUIReverse"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -26.5
+offset_right = 20.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "R"
+label_settings = SubResource("LabelSettings_b1grh")
+horizontal_alignment = 1
+vertical_alignment = 1
