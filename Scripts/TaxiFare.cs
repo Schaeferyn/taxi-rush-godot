@@ -9,7 +9,8 @@ public partial class TaxiFare : Node3D
 	//[Export] private FareData myData;
 	[Export] public string name;
 	[Export] public int age;
-	[Export] public string targetLocation;
+	[Export] public string targetLocationName;
+	[Export] public int targetLocationIndex;
 
 	private bool isTaxiNear;
 	private PlayerTaxi nearbyTaxi;
@@ -74,7 +75,8 @@ public partial class TaxiFare : Node3D
 			if (finalDist <= pickupFinalizeDistance)
 			{
 				//LocationData data = LocationManager.Instance.GetLocationByName(targetLocation);
-				FareDropoff dropoff = LocationManager.Instance.GetLocationByName(targetLocation);
+				//FareDropoff dropoff = LocationManager.Instance.GetLocationByName(targetLocationName);
+				FareDropoff dropoff = LocationManager.Instance.GetLocationByIndex(targetLocationIndex);
 				TaxiSessionManager.Instance.FarePickedUp(this, dropoff);
 
 				nearbyTaxi.FinalizeFarePickup(dropoff);

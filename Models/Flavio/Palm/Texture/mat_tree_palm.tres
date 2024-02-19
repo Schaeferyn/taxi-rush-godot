@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b3vuskfurr64e"]
+
+[ext_resource type="Texture2D" uid="uid://bcn1iw23vt7j0" path="res://Models/Flavio/Palm/Texture/TEXPalm.jpg" id="1_g46vk"]
+[ext_resource type="Texture2D" uid="uid://cabdrfiyav8wm" path="res://Models/Flavio/Palm/Texture/AOPalm.png" id="2_0of78"]
+
+[resource]
+albedo_texture = ExtResource("1_g46vk")
+ao_texture = ExtResource("2_0of78")

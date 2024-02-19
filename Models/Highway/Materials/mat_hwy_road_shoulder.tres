@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://17n8plyg3bqc"]
+
+[ext_resource type="Texture2D" uid="uid://dl8x1vgso5kcu" path="res://Models/Highway/Textures/Roads_Center_01.png" id="1_0bs74"]
+
+[resource]
+albedo_texture = ExtResource("1_0bs74")

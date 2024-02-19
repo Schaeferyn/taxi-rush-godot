@@ -404,36 +404,42 @@ surface_material_override/0 = ExtResource("4_nfyrq")
 
 [node name="Debug1" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.72069e-05, 2.1276, 0.00178909)
+visible = false
 text = "0.00
 "
 font_size = 64
 
 [node name="Debug2" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -6.18172e-08, 0.707107, 0.707107, 6.18172e-08, 0.707107, -0.707107, -0.000367403, 1.18514, -1.44869)
+visible = false
 text = "0.00
 "
 font_size = 64
 
 [node name="DebugFL" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, 1.339, 0.169, 1.377)
+visible = false
 text = "0.00
 "
 font_size = 64
 
 [node name="DebugFR" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, -1.33877, 0.16914, 1.37701)
+visible = false
 text = "0.00
 "
 font_size = 64
 
 [node name="DebugRL" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, 1.339, 0.169, -1.377)
+visible = false
 text = "0.00
 "
 font_size = 64
 
 [node name="DebugRR" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, -1.33037, 0.16914, -1.37777)
+visible = false
 text = "0.00
 "
 font_size = 64

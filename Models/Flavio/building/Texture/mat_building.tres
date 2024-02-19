@@ -7,3 +7,5 @@
 albedo_texture = ExtResource("1_6yans")
 metallic = 1.0
 metallic_texture = ExtResource("2_314j6")
+distance_fade_min_distance = 150.0
+distance_fade_max_distance = 120.0

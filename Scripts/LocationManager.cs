@@ -6,10 +6,10 @@ public partial class LocationManager : Node
 {
 	public static LocationManager Instance;
 
-	//[Export] private LocationData[] locations;
+	// [Export] private LocationData[] locations;
 	[Export] private Node3D[] locationNodes;
 
-	//private Dictionary<string, LocationData> locationDict;
+	// private Dictionary<string, LocationData> locationDict;
 
 	public override void _EnterTree()
 	{
@@ -18,27 +18,29 @@ public partial class LocationManager : Node
 		Instance = this;
 	}
 
-	public override void _Ready()
-	{
-		base._Ready();
-
-		// locationDict = new Dictionary<string, LocationData>(locations.Length);
-		//
-		// foreach (LocationData loc in locations)
-		// {
-		// 	locationDict.Add(loc.locationName, loc);
-		// }
-	}
+	// public override void _Ready()
+	// {
+	// 	base._Ready();
+	//
+	// 	locationDict = new Dictionary<string, LocationData>(locations.Length);
+	// 	
+	// 	foreach (LocationData loc in locations)
+	// 	{
+	// 		locationDict.Add(loc.locationName, loc);
+	// 	}
+	// }
 
 	public FareDropoff GetLocationByName(string nameToCheck)
 	{
+		//if (!locationDict.ContainsKey(nameToCheck)) return null;
+		
 		Node3D node = locationNodes[0];
 		
 		if (node is FareDropoff data)
 		{
 			return data;
 		}
-
+		
 		return null;
 	}
 
@@ -52,7 +54,7 @@ public partial class LocationManager : Node
 		{
 			return data;
 		}
-
+		
 		return null;
 	}
 }

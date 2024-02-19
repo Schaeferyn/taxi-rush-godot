@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cwv8rq8osm8ih"]
+
+[ext_resource type="Texture2D" uid="uid://bgdbe7quibx3t" path="res://Textures/Locations/deLaNuit.png" id="1_34kxb"]
+[ext_resource type="Script" path="res://Scripts/LocationData.cs" id="2_kfd2s"]
+
+[resource]
+script = ExtResource("2_kfd2s")
+locationName = "Restaurant de la Nuit"
+locationTexture = ExtResource("1_34kxb")
+locationPosition = Vector3(16, 1.495, 16)

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c6qr4ubi1abn0"]
+
+[ext_resource type="Texture2D" uid="uid://kqk4syi6jhek" path="res://Models/Flavio/store_shoop/Texture/TEXStore3.jpg" id="1_ao7d4"]
+[ext_resource type="Texture2D" uid="uid://cb0c2fa0nubll" path="res://Models/Flavio/store_shoop/Texture/GLOSSStore3.jpg" id="2_3m33m"]
+
+[resource]
+albedo_texture = ExtResource("1_ao7d4")
+metallic = 1.0
+metallic_texture = ExtResource("2_3m33m")

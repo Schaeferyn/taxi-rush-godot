@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cms4is8lnx4js"]
+
+[ext_resource type="Texture2D" uid="uid://o60l7dcd074r" path="res://Models/Flavio/Chalet/Texture/TEXChalet.jpg" id="1_kd4to"]
+[ext_resource type="Texture2D" uid="uid://dwfc0jk4pdv71" path="res://Models/Flavio/Chalet/Texture/GLOSSChalet.jpg" id="2_qgp8j"]
+
+[resource]
+albedo_texture = ExtResource("1_kd4to")
+metallic = 1.0
+metallic_texture = ExtResource("2_qgp8j")
+ao_enabled = true

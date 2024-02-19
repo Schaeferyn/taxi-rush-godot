@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class PlayerTaxi : VehicleBody3D
 {
@@ -71,7 +72,7 @@ public partial class PlayerTaxi : VehicleBody3D
 	public override void _Ready()
 	{
 		base._Ready();
-
+		
 		Engine.MaxFps = 60;
 
 		wheel_frontLeft = GetNode<VehicleWheel3D>("wheel_front_left");
@@ -96,7 +97,7 @@ public partial class PlayerTaxi : VehicleBody3D
 		debugLabelFR = GetNode<Label3D>("DebugFR");
 		debugLabelRL = GetNode<Label3D>("DebugRL");
 		debugLabelRR = GetNode<Label3D>("DebugRR");
-
+		
 		CanDrive = true;
 		TaxiSessionManager.Instance.OnFarePickup += FarePickedUp;
 	}
@@ -116,7 +117,21 @@ public partial class PlayerTaxi : VehicleBody3D
 		{
 			arrow.LookAt(targetFareLocation.locationPosition);
 		}
+
+		// if (Input.IsActionJustPressed("handbrake"))
+		// {
+		// 	testSphere.Visible = true;
+		//
+		// 	//Task.Delay(2000).ContinueWith(HideSphereFunction());
+		// 	GetTree().CreateTimer(2.0f).Timeout += HideSphereFunction;
+		// }
 	}
+
+	// void HideSphereFunction()
+	// {
+	// 	testSphere.Visible = false;
+	// 	GD.Print("Timer finished");
+	// }
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -240,6 +255,8 @@ public partial class PlayerTaxi : VehicleBody3D
 		CanDrive = false;
 		CurrentFare = fare;
 		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.Black;
+
+		Freeze = true;
 	}
 
 	void FarePickedUp(FareLocationData locData)
@@ -256,7 +273,9 @@ public partial class PlayerTaxi : VehicleBody3D
 	{
 		CanDrive = true;
 		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.White;
-		
+
+		Freeze = false;
+        
 		if (locData != null)
 		{
 			//GD.Print("Activating " + locData.locationName);
@@ -273,6 +292,8 @@ public partial class PlayerTaxi : VehicleBody3D
 	{
 		arrow.Visible = false;
 		CanDrive = false;
+		Freeze = true;
+		
 		LinearVelocity = Vector3.Zero;
 		AngularVelocity = Vector3.Zero;
 		//(taxiMesh.GetActiveMaterial(0) as StandardMaterial3D).AlbedoColor = Colors.Black;
@@ -295,6 +316,7 @@ public partial class PlayerTaxi : VehicleBody3D
 		CurrentFare.EndDropoff();
 		CanDrive = true;
 		CurrentFare = null;
+		Freeze = false;
 	}
 
 	public void ToggleReverse()

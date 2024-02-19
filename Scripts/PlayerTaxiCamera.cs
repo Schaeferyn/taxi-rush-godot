@@ -61,19 +61,19 @@ public partial class PlayerTaxiCamera : Camera3D
 		GlobalRotation = rot;
 	}
 
-	void UpdateTransforms()
-	{
-		t_prev = t_current;
-		t_current = camTarget.GlobalTransform;
-		shouldUpdateTransforms = false;
-	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-		base._PhysicsProcess(delta);
-
-		shouldUpdateTransforms = true;
-	}
+	// void UpdateTransforms()
+	// {
+	// 	t_prev = t_current;
+	// 	t_current = camTarget.GlobalTransform;
+	// 	shouldUpdateTransforms = false;
+	// }
+	//
+	// public override void _PhysicsProcess(double delta)
+	// {
+	// 	base._PhysicsProcess(delta);
+	//
+	// 	shouldUpdateTransforms = true;
+	// }
 
 	public void ApplyOverride(Vector3 pos, Node3D lookTarget, bool snap)
 	{
